@@ -157,3 +157,64 @@ Be specific: Provide clear and detailed context about the role you want Claude t
 Experiment and iterate: Try different roles and variations of your prompts to find the best approach for your specific use case. Prompt engineering often involves experimentation and iteration to achieve optimal results.
 Lab 3 - Assigning Roles - Role Prompting
 The accompanying Python notebook will provide hands-on practice in applying role prompting to various scenarios, such as improving Claude's performance in math problems and tailoring its communication style for different audiences. By completing the exercises, students will gain a deeper understanding of how to effectively use role prompting to unlock Claude's full potential and achieve desired outcomes.
+
+# 4
+4 - Separating Data and Instructions
+
+Lesson Objective:
+The objective of this lesson is to teach you how to use XML tags to structure prompts and guide Claude's responses. You will learn how wrapping key parts of their prompts (such as instructions, examples, or input data) in XML tags can help Claude better understand the context and generate more accurate outputs. The lesson will cover what XML tags are, why they are useful, and how to effectively incorporate them into prompts, particularly when working with complex prompts or variable inputs.
+
+What are XML tags?
+ Use XML Tags
+
+XML tags are angle-bracket tags like <tag></tag>. They come in pairs and consist of an opening tag, such as <tag>, and a closing tag marked by a /, such as </tag>. XML tags are used to wrap around content, like this: <tag>content</tag>.
+
+Opening and closing XML tags should share exactly the same name. The tag name can be anything you like, as long as it's wrapped in angle brackets, although we recommend naming your tags something contextually relevant to the content it's wrapped around.
+
+XML tags should always be referred to in pairs and never as just the first half of a set (e.g., "Using the document in <doc></doc> tags, answer this question.").
+
+📌 XML tag names
+
+There is no canonical best set of XML tag names that Claude performs particularly well with. For example, <doc> works just as well as <document>. The only time you need very specific XML tag names is in the case of function calling.
+Why use XML tags?
+There are several reasons why you might want to incorporate XML tags into your prompts:
+
+Improved accuracy: XML tags help Claude distinguish between different parts of your prompt, such as instructions, examples, and input data. This can lead to more precise parsing of your prompt and thus more relevant and accurate responses, particularly in domains like mathematics or code generation.
+Clearer structure: Just as headings and sections make documents easier for humans to follow, XML tags help Claude understand the hierarchy and relationships within your prompt.
+Easier post-processing: You can also ask Claude to use XML tags in its responses, making it simpler to extract key information programmatically.
+How to use XML tags
+You can use XML tags to structure and delineate parts of your prompt from one another, such as separating instructions from content, or examples from instructions.
+
+Role	Content
+User	Please analyze this document and write a detailed summary memo according to the instructions below, following the format given in the example:  <document> {{DOCUMENT}} </document>  <instructions> {{DETAILED_INSTRUCTIONS}} </instructions>  <example> {{EXAMPLE}} </example>
+Please analyze this document and write a detailed summary memo according to the instructions below, following the format given in the example:
+
+Handling variable inputs
+When working with prompt templates that include variable inputs, use XML tags to indicate where the variable content should be inserted, such as in the following example:
+
+Role	Content
+User	I will tell you the name of an animal. Please respond with the noise that animal makes. <animal>{{ANIMAL}}</animal>
+As a general rule, you should always separate your variable inputs from the rest of your prompt using XML tags. This makes it clear to Claude where the examples or data begin and end, leading to more accurate responses.
+
+Requesting structured output
+You can ask Claude to use XML tags in its responses to make the output easier to parse and process:
+
+Role	Content
+User	Please extract the key details from the following email and return them in XML tags:  - Sender name in <sender></sender> tags - Main topic in <topic></topic> tags - Any deadlines or dates mentioned in <deadline></deadline> tags  <email> From: John Smith To: Jane Doe Subject: Project X Update  Hi Jane,  I wanted to give you a quick update on Project X. We've made good progress this week and are on track to meet the initial milestones. However, we may need some additional resources to complete the final phase by the August 15th deadline.  Can we schedule a meeting next week to discuss the budget and timeline in more detail?  Thanks, John </email>
+Claude's response:
+
+Role	Response
+Assistant	<sender>John Smith</sender> <topic>Project X Update</topic> <deadline>August 15th</deadline>
+XML tags make it easier to retrieve targeted details from Claude's response by allowing for programmatic extraction of content between specific tags.
+
+When calling Claude via the API, you can pass closing XML tags (e.g., </json>) to the stop_sequences parameter to have Claude stop generating once it reaches the desired endpoint. This can save both money and time by eliminating any concluding remarks after the core response. The same is true of skipping Claude's friendly preamble by prefilling Claude's response with an opening XML tag.
+
+XML best practices
+To get the most out of XML tags, keep these tips in mind:
+
+Use descriptive tag names that reflect the content they contain (e.g., <instructions>, <example>, <input>).
+Be consistent with your tag names throughout your prompts.
+Always include both the opening (<tag>) and closing (</tag>) tags, including when you reference them, such as "Using the document in <doc></doc> tags, answer this question."
+You can and should nest XML tags, although more than five layers of nesting may decrease performance depending on the complexity of the use case.
+Lab 4 - Separating Data from Instructions
+The accompanying Python notebook will provide hands-on practice in applying XML tags to structure prompts and guide Claude's responses. You will learn how to effectively use XML tags to separate instructions from input data, handle variable inputs, and request structured output. The exercises will challenge you to incorporate XML tags into various prompts to improve Claude's accuracy and understanding of the task at hand. By completing these exercises, you will gain a deeper understanding of how to leverage the power of XML tags to unlock Claude's full potential and achieve more precise and accurate outputs, especially when working with complex prompts or variable inputs.
