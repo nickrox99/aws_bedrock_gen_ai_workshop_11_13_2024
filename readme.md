@@ -218,3 +218,52 @@ Always include both the opening (<tag>) and closing (</tag>) tags, including whe
 You can and should nest XML tags, although more than five layers of nesting may decrease performance depending on the complexity of the use case.
 Lab 4 - Separating Data from Instructions
 The accompanying Python notebook will provide hands-on practice in applying XML tags to structure prompts and guide Claude's responses. You will learn how to effectively use XML tags to separate instructions from input data, handle variable inputs, and request structured output. The exercises will challenge you to incorporate XML tags into various prompts to improve Claude's accuracy and understanding of the task at hand. By completing these exercises, you will gain a deeper understanding of how to leverage the power of XML tags to unlock Claude's full potential and achieve more precise and accurate outputs, especially when working with complex prompts or variable inputs.
+
+# 5
+5 - Formatting output and speaking for Claude
+
+Lesson Objective:
+The objective of this lesson is to teach you how to guide Claude's responses by prefilling the Assistant message and specifying the desired output format. You will learn how these powerful techniques allow them to direct Claude's actions, control the structure and style of the generated content, and maintain character consistency during role-play scenarios. The lesson will cover the benefits of prefilling and output format control, such as increased steerability, improved performance, and easier post-processing of Claude's responses.
+
+Prefill Claude's response
+When using Claude, you have the ability to guide its responses and control the output format by prefilling the Assistant message and providing clear instructions. These techniques allow you to direct Claude's actions, specify the structure and style of the generated content, and even help Claude stay in character during role-play scenarios. By leveraging prefilling and output format control, you can significantly improve Claude's performance and obtain more accurate and tailored responses.
+
+Prefill Claudes response
+
+Prefilling Claude's response offers several key benefits:
+
+Increased steerability: By providing some initial text for Claude to continue from, you can steer Claude's response in a desired direction. This is particularly useful when you want Claude to focus on a specific topic, generate a particular type of content, or act a certain way.
+Control output format: Prefilling allows you to specify the exact format you want Claude to use for its output. This is especially handy when working with structured data formats like JSON, XML, or custom formats.
+Maintain character consistency: In role-play scenarios, prefilling Claude's response can help Claude stay in character throughout a long conversation. By consistently reminding Claude of its role in the Assistant message, you can better ensure that Claude maintains the desired persona.
+User and Assistant Roles
+
+To prefill Claude's response, simply include the desired initial text in the Assistant message when making an API request. Here's an example prompt:
+
+Role	Content
+User	Please write a haiku about a cat. Put it in <haiku> tags.
+Assistant (prefill)	<haiku>
+By starting the Assistant message with the opening <haiku> tag, you give Claude a clear starting point and constrain its output to be within the specified format. Claude will then continue directly from where you left off:
+
+Role	Response
+Assistant (Claude's response)	Soft paws, gentle purr Whiskers twitch, tail swishes high Feline grace divine </haiku>
+Control output format
+In addition to prefilling, you can control Claude's output format by providing clear instructions and examples in your prompt. Claude can understand and follow instructions related to various formats, such as JSON, XML, HTML, Markdown, CSV, and custom formats.
+
+For instance, if you want Claude to generate a JSON object containing specific information, you can explicitly ask for it in your prompt:
+
+Role	Content
+User	Please extract the name, size, price, and color from this product description and output it within a JSON object.  <description>The SmartHome Mini is a compact smart home assistant available in black or white for only $49.99. At just 5 inches wide, it lets you control lights, thermostats, and other connected devices via voice or app—no matter where you place it in your home. This affordable little hub brings convenient hands-free control to your smart devices.</description>
+Claude will then generate the requested JSON object, adhering to the specified structure:
+
+Role	Response
+Assistant (Claude's response)	{ "name": "SmartHome Mini", "size": "5 inches wide", "price": "$49.99", "colors": [ "black", "white" ] }
+You can also provide examples of the desired output format to help Claude better understand your requirements. When including examples, make it clear that Claude should follow the formatting of the examples provided:
+
+Role	Content
+User	Your task is to write a poem. Here are some examples of ideal formatting for the poem:  <poem> Title: "Autumn Leaves" Verse 1: Crisp autumn leaves dance In the gentle, chilly breeze A colorful sight  Verse 2: Red, orange, and gold Painting the world with beauty Before winter comes </poem>  <poem> Title: "Moonlit Night" Verse 1: Moonlight casts shadows Across the tranquil garden A peaceful retreat  Verse 2: Stars twinkle above As crickets sing their nightsong Nature's lullaby </poem>  Now, please write a poem about a sunset, following the formatting of the examples above.
+Assistant (prefill)	<poem>
+Assistant (Claude's response)	Title: "Sunset Symphony" Verse 1: Fiery sun descends Painting the sky with wonder A masterpiece forms  Verse 2: Pinks, purples, and reds Blending in pure harmony Day bids night hello </poem>
+By providing clear instructions and examples, you can guide Claude to generate content in the desired format, making it easier to post-process and integrate Claude's responses into your application.
+
+Lab 5 - Formatting Output - Speaking for Claude
+The accompanying Python notebook will provide hands-on practice in applying prefilling and output format control techniques to guide Claude's responses, specify the structure and style of the generated content, and maintain character consistency. You will learn how to use these techniques to steer Claude's focus, generate specific types of content, and work with various data formats. The exercises will challenge you to use prefilling and output format control to achieve desired outcomes, such as compelling Claude to argue for a specific viewpoint, generating multiple poems with clear separations, creating haikus about different animals, and extracting information into structured formats like JSON. By completing these exercises, you will gain a deeper understanding of how to leverage the power of prefilling and output format control to unlock Claude's full potential and achieve more precise and tailored outputs.
