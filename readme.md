@@ -104,8 +104,56 @@ However, if you ask Claude to pick just one player despite differing opinions, i
 Role	Prompt
 User	Who is the best basketball player of all time? Yes, there are differing opinions, but if you absolutely had to pick one player, who would it be?
 Assistant	There is no definitive answer to who is the best basketball player of all time, as reasonable people can disagree on this. However, if forced to choose just one player, I would say Michael Jordan is most commonly considered the GOAT (Greatest Of All Time) based on his exceptional talent, championships, awards, and cultural impact on the game of basketball. But others like LeBron James, Kareem Abdul-Jabbar, Wilt Chamberlain and Bill Russell are also frequently mentioned in the debate. It's a subjective call without a clear consensus.
-The Golden Rule of Clear Prompting
-To ensure your prompts are effective, follow the "Golden Rule of Clear Prompting": show your prompt to a colleague or friend and ask them to follow the instructions themselves. If they can produce the exact result you want, then your prompt is likely clear enough for Claude as well. Remember, while Claude is a powerful tool, it relies on your guidance to deliver the best results. By providing clear, direct, and well-structured prompts, you can unlock Claude's full potential and consistently achieve your desired outcomes.
+
+*The Golden Rule of Clear Prompting*
+**To ensure your prompts are effective, follow the "Golden Rule of Clear Prompting": show your prompt to a colleague or friend and ask them to follow the instructions themselves. If they can produce the exact result you want, then your prompt is likely clear enough for Claude as well. Remember, while Claude is a powerful tool, it relies on your guidance to deliver the best results. By providing clear, direct, and well-structured prompts, you can unlock Claude's full potential and consistently achieve your desired outcomes.**
 
 Lab 2 - Being Clear and Direct
 The accompanying Python notebook will give you hands-on practice in applying these techniques to elicit the most relevant and accurate responses from Claude. You'll learn how to refine your prompts to control various aspects of Claude's output, such as skipping the preamble in a haiku or getting Claude to choose a single "best" answer. The exercises will challenge you to modify prompts to achieve specific goals, like generating responses in Spanish, getting a one-word answer, or encouraging Claude to produce longer responses. By completing these exercises, you'll gain a deeper understanding of how to communicate effectively with Claude and harness its capabilities to the fullest.
+
+# 3
+3 - Assigning Roles - Role Prompting
+
+Lesson Objective:
+In this lesson you will learn how to use role prompting to enhance Claude's performance and tailor its responses to specific contexts. You will learn how assigning a role to Claude can improve its accuracy and understanding of the task at hand, as well as influence its tone, demeanor, and communication style to better suit the desired output. The lesson will cover when to use role prompting and provide examples demonstrating its effectiveness in various scenarios.
+
+Claude is a highly capable AI assistant, but sometimes it benefits from having additional context to understand the role it should play in a given conversation. By assigning a role to Claude, you can prime it to respond in a specific way, improve its accuracy and performance, and tailor its tone and demeanor to match the desired context. This technique is known as role prompting.
+
+Role Prompting
+
+Role prompting can enhance Claude's performance in two main ways:
+
+Improved accuracy and performance: In certain complex situations, such as solving math problems or writing code, assigning a relevant role to Claude can significantly improve its performance and understanding of the task at hand.
+Tailored tone and style: By specifying a role, you can influence Claude's tone, demeanor, and communication style to better suit your needs. For example, asking Claude to act as a kindergarten teacher will result in a very different response compared to asking it to be a graduate professor.
+Consider the following example where Claude is asked to provide a one-sentence perspective on skateboarding:
+
+Role	Prompt
+User	In one sentence, what do you think about skateboarding?
+Assistant	Skateboarding is an exciting and creative sport that combines athleticism, skill, and self-expression.
+Now, let's see how Claude's response changes when we prime it to inhabit the role of a cat:
+
+Role	Prompt
+System	You are a cat.
+User	In one sentence, what do you think about skateboarding?
+Assistant	As a cat, I find skateboarding to be a noisy and confusing activity that often disturbs my naps and makes me question the sensibility of humans.
+As you can see, by assigning the role of a cat to Claude, its perspective, tone, and content adapt to match the new context.
+
+Role prompting can also improve Claude's performance in tasks involving logic or mathematics. For example, consider the following logic puzzle:
+
+Role	Prompt
+User	Jack is looking at Anne. Anne is looking at George. Jack is married, George is not, and we don't know if Anne is married. Is a married person looking at an unmarried person?
+Assistant	It's not possible to determine with certainty based on the given information. We know that Jack is married and George is not, but Anne's marital status is unknown. If Anne is unmarried, then yes, a married person (Jack) is looking at an unmarried person (Anne). However, if Anne is married, then no, a married person is not looking at an unmarried person. Without knowing Anne's marital status, we cannot definitively answer the question.
+While Claude's response is reasonable, it doesn't provide a definitive answer. Now, let's see how priming Claude with the role of a logic bot changes its response:
+
+Role	Prompt
+System	You are a logic bot designed to answer complex logic problems.
+User	Jack is looking at Anne. Anne is looking at George. Jack is married, George is not, and we don't know if Anne is married. Is a married person looking at an unmarried person?
+Assistant	Yes, a married person is looking at an unmarried person. We know that Jack is married and George is not married. Therefore, when Jack looks at Anne, he is a married person looking at a person whose marital status is unknown. Regardless of Anne's marital status, Jack, who is married, is looking at either an unmarried person (if Anne is unmarried) or a person who is looking at an unmarried person (if Anne is married and looking at George). So, at least one married person (Jack) is looking at an unmarried person (Anne) or a person looking at an unmarried person (George), regardless of Anne's marital status.
+By assigning the role of a logic bot, Claude provides a more definitive and accurate answer to the logic puzzle.
+
+To get the most out of role prompting, keep these tips in mind:
+
+Be specific: Provide clear and detailed context about the role you want Claude to play. The more information you give, the better Claude can understand and embody the desired role.
+Experiment and iterate: Try different roles and variations of your prompts to find the best approach for your specific use case. Prompt engineering often involves experimentation and iteration to achieve optimal results.
+Lab 3 - Assigning Roles - Role Prompting
+The accompanying Python notebook will provide hands-on practice in applying role prompting to various scenarios, such as improving Claude's performance in math problems and tailoring its communication style for different audiences. By completing the exercises, students will gain a deeper understanding of how to effectively use role prompting to unlock Claude's full potential and achieve desired outcomes.
