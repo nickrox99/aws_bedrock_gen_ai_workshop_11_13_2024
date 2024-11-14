@@ -267,3 +267,61 @@ By providing clear instructions and examples, you can guide Claude to generate c
 
 Lab 5 - Formatting Output - Speaking for Claude
 The accompanying Python notebook will provide hands-on practice in applying prefilling and output format control techniques to guide Claude's responses, specify the structure and style of the generated content, and maintain character consistency. You will learn how to use these techniques to steer Claude's focus, generate specific types of content, and work with various data formats. The exercises will challenge you to use prefilling and output format control to achieve desired outcomes, such as compelling Claude to argue for a specific viewpoint, generating multiple poems with clear separations, creating haikus about different animals, and extracting information into structured formats like JSON. By completing these exercises, you will gain a deeper understanding of how to leverage the power of prefilling and output format control to unlock Claude's full potential and achieve more precise and tailored outputs.
+
+# 6
+
+6 - Precognition - Thinking Step-by-Step
+
+Lesson Objective:
+In this less you will learn how to encourage Claude to think through complex questions or tasks step-by-step before providing a final answer. This technique, also known as chain of thought (CoT) prompting, can significantly improve the accuracy and nuance of Claude's responses. You will learn how to explicitly instruct Claude to break down its thought process, leading to more methodical and thorough problem-solving. They will also explore how to capture Claude's step-by-step reasoning using XML tags for easier post-processing.
+
+Why let Claude think?
+ Let Claude Think
+
+When faced with a complex question or task, it's often beneficial to let Claude think through the problem step-by-step before providing a final answer. Just like humans, Claude can perform better when given time to reason through a problem before responding.
+
+Allowing Claude to think out loud can lead to more accurate and intelligent outputs, particularly for multifaceted or challenging queries. By explicitly instructing Claude to think step-by-step, you encourage a more methodical and thorough approach to problem-solving. Furthermore, examining Claude's thought process can be invaluable for troubleshooting and identifying areas where your prompt instructions may be unclear or easily misinterpreted.
+
+How to prompt for thinking step-by-step
+It's important to note that thinking cannot happen without output! Claude must output its thinking in order to actually "think."
+
+The simplest way to encourage thinking step-by-step is to include the phrase "Think step by step" in your prompt. For example:
+
+Role	Prompt
+User	Are both the directors of Jaws and Casino Royale from the same country? Think step by step.
+Claude will then break down its thought process before providing a final answer:
+
+Role	Response
+Assistant	To determine if the directors of the movies "Jaws" and "Casino Royale" are from the same country, let's break it down into steps:  Step 1: Identify the director of the movie "Jaws." The director of "Jaws" is Steven Spielberg.  Step 2: Identify the country of origin for Steven Spielberg. Steven Spielberg was born in Cincinnati, Ohio, United States.  Step 3: Identify the director of the movie "Casino Royale." The director of the 2006 movie "Casino Royale" is Martin Campbell.  Step 4: Identify the country of origin for Martin Campbell. Martin Campbell was born in Hastings, New Zealand.  Step 5: Compare the countries of origin for both directors. Steven Spielberg is from the United States, while Martin Campbell is from New Zealand.  Therefore, the directors of "Jaws" and "Casino Royale" are not from the same country.
+For more complex queries, you can guide Claude's thinking by specifying the steps it should take. Here's an example:
+
+Role	Prompt
+User	Use the following clues to answer the multiple-choice question below, using this procedure: 1. Go through the clues one by one and consider whether each is potentially relevant 2. Combine the relevant clues to reason out the answer to the question 3. Map the answer to one of the multiple choice options: (a), (b), or (c)  Clues: 1. Miss Scarlett was the only person in the lounge. 2. The person with the pipe was in the kitchen. 3. Colonel Mustard was the only person in the observatory. 4. Professor Plum was not in the library nor the billiard room. 5. The person with the candlestick was in the observatory.  Question: Was Colonel Mustard in the observatory with the candlestick? (a) Yes; Colonel Mustard was in the observatory with the candlestick (b) No; Colonel Mustard was not in the observatory with the candlestick (c) Unknown; there is not enough information to determine whether Colonel Mustard was in the observatory with the candlestick
+By outlining a clear thinking process, you help Claude focus its reasoning on the most relevant information and ensure it thinks through all the necessary factors to perform well at its given task.
+
+Capturing Claude's thought process
+To make it easier to separate Claude's step-by-step reasoning from its final response, consider using XML tags like <thinking> and <answer>. You can instruct Claude to place its thought process inside <thinking> tags and its ultimate answer within <answer> tags.
+
+Here's an example prompt with this method:
+
+Role	Prompt
+User	[Rest of prompt] Before answering the question, please think about it step-by-step within <thinking></thinking> tags. Then, provide your final answer within <answer></answer> tags.
+You can even prefill the <thinking> tag in the Assistant role to guide Claude as to where to begin:
+
+Role	Prompt
+Assistant (prefill)	<thinking>
+Claude will then complete its thought process within the tags and provide its final answer:
+
+Role	Response
+Assistant	<thinking> [...some thoughts] </thinking>  <answer> [some answer] </answer>
+Using tags makes it simple to extract just the final answer within <answer></answer> tags during post-processing if desired.
+
+Food for Throught
+While encouraging step-by-step thinking can greatly enhance Claude's responses, keep these points in mind:
+
+Let Claude Think outloud
+
+Thinking cannot occur unless Claude is allowed to output its thought process. There's no way to have Claude think privately and only return the final answer.
+Prompting for step-by-step reasoning will increase the length of Claude's outputs, which can impact latency. Consider this tradeoff when deciding whether to use this technique.
+Lab 6 - Precognition
+The accompanying Python notebook will provide hands-on practice in applying the step-by-step thinking technique to various scenarios. You will learn how to guide Claude's thinking process to improve the accuracy and nuance of its responses, particularly for complex or ambiguous tasks. The exercises will challenge you to use XML tags to capture Claude's reasoning and format its output for easier post-processing. By completing the exercises, you will gain a deeper understanding of how to leverage the power of chain of thought prompting to unlock Claude's full potential and achieve more reliable and insightful results.
